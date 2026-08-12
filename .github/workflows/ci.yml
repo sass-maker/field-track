@@ -7,12 +7,13 @@ on:
     branches: [main]
 
 jobs:
-  check:
+  scaffold:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: npm install
-      - run: npm run check
+      - name: Verify project contract
+        run: |
+          test -f AGENTS.md
+          test -f PROJECT_STATUS.md
+          test -f PRODUCT.md
+          test -f openspec/config.yaml

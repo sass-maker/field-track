@@ -5,8 +5,18 @@ Also read and follow the shared fleet-level agent standard at `../AGENTS.md`. Tr
 ## Project
 
 - **Stack**: Kotlin Android + Room/WorkManager; Vite + React; Cloudflare Worker + D1
-- **Local dev**: TBD
-- **Deploy**: TBD
+- **Package manager**: pnpm for TypeScript workspaces; Gradle wrapper for Android
+- **Local dev**: use repository scripts once the active OpenSpec change scaffolds them
+- **Deploy**: manual only; Android distribution and Cloudflare deployment remain separate release gates
+
+## Product constraints
+
+- Track an employee only during an explicitly active shift.
+- Keep the foreground-service notification visible while Android tracking runs.
+- Preserve the distinction between no signal and an ended shift in every API and UI state.
+- Optimize for low-end Android hardware, intermittent 4G, and an approximately 100-employee fleet.
+- Do not put credentials, employee history, production identifiers, or real employee data in the repository.
+- Read `PRODUCT.md`, `DESIGN.md`, and the active OpenSpec change before feature work.
 
 ## Visual work
 

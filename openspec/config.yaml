@@ -1,0 +1,34 @@
+schema: spec-driven
+
+context: |
+  Product: Private employee location tracker for about 100 field employees.
+  Clients: Native Kotlin Android employee app and Vite + React manager dashboard.
+  Backend: TypeScript Cloudflare Worker with Cloudflare D1; ordinary HTTPS and dashboard polling, not WebSockets.
+  Maps: MapLibre with OpenStreetMap-compatible tiles.
+  Constraints: Low-end Android hardware, intermittent 4G, explicit shift-only tracking, visible foreground notification, team-scoped manager access, audit logs, configurable retention, no real employee data in source.
+  Repository: pnpm for TypeScript workspaces and Gradle wrapper for Android. Production deploys are manual.
+
+rules:
+  proposal:
+    - Keep the MVP boundary and non-goals explicit.
+    - State deploy, privacy, and dependency impacts.
+  design:
+    - Include a Mermaid diagram for the Android-to-API-to-dashboard data flow.
+    - Explain Android background execution, offline recovery, status derivation, authorization, retention, and deletion.
+  specs:
+    - Use observable GIVEN/WHEN/THEN scenarios for happy paths, offline recovery, stale data, authorization, and deletion.
+  tasks:
+    - Order tasks into independently verifiable vertical slices.
+    - Include the smallest relevant check after each slice.
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing
