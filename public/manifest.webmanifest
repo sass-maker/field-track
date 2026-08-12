@@ -1,0 +1,9 @@
+{
+  "name": "Field Track",
+  "short_name": "Field Track",
+  "description": "Shift-bound field employee location tracking.",
+  "start_url": "/employee",
+  "display": "standalone",
+  "background_color": "#f4f1e8",
+  "theme_color": "#153f36"
+}

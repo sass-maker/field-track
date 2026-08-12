@@ -7,13 +7,23 @@ on:
     branches: [main]
 
 jobs:
-  scaffold:
+  quality:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify project contract
-        run: |
-          test -f AGENTS.md
-          test -f PROJECT_STATUS.md
-          test -f PRODUCT.md
-          test -f openspec/config.yaml
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm quality
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Compile Android debug app
+        working-directory: apps/employee-mobile/android
+        run: ./gradlew :app:assembleDebug --no-daemon

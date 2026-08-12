@@ -1,0 +1,10 @@
+---
+import AdminDashboard from '../../../components/AdminDashboard.tsx';
+import AppLayout from '../../../layouts/AppLayout.astro';
+
+const employeeId = Astro.params.id ?? null;
+---
+
+<AppLayout title="Employee detail" description="Review an employee's retained position and dated route." active="admin">
+  <AdminDashboard client:load initialEmployeeId={employeeId} />
+</AppLayout>
