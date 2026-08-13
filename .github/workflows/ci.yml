@@ -24,6 +24,6 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-      - name: Compile Android debug app
+      - name: Verify Android debug app
         working-directory: apps/employee-mobile/android
-        run: ./gradlew :app:assembleDebug --no-daemon
+        run: ./gradlew :app:lintDebug :app:testDebugUnitTest :app:assembleDebug --no-daemon
