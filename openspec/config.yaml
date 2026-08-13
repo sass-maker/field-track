@@ -2,19 +2,19 @@ schema: spec-driven
 
 context: |
   Product: Private employee location tracker for about 100 field employees.
-  Clients: Native Kotlin Android employee app and Vite + React manager dashboard.
-  Backend: TypeScript Cloudflare Worker with Cloudflare D1; ordinary HTTPS and dashboard polling, not WebSockets.
+  Clients: React Native Android employee collector plus an Astro web application with React islands for manager surfaces.
+  Backend: Astro server endpoints on Cloudflare Workers with Cloudflare D1; ordinary HTTPS and dashboard polling, not WebSockets.
   Maps: MapLibre with OpenStreetMap-compatible tiles.
-  Constraints: Low-end Android hardware, intermittent 4G, explicit shift-only tracking, visible foreground notification, team-scoped manager access, audit logs, configurable retention, no real employee data in source.
-  Repository: pnpm for TypeScript workspaces and Gradle wrapper for Android. Production deploys are manual.
+  Constraints: Low-end Android phones, intermittent 4G, continuous administrator-controlled collection, visible Android foreground notification, server-side retention policy, team-scoped manager access, audit logs, no real employee data in source.
+  Repository: pnpm. Production deploys are manual.
 
 rules:
   proposal:
     - Keep the MVP boundary and non-goals explicit.
     - State deploy, privacy, and dependency impacts.
   design:
-    - Include a Mermaid diagram for the Android-to-API-to-dashboard data flow.
-    - Explain Android background execution, offline recovery, status derivation, authorization, retention, and deletion.
+    - Include a Mermaid diagram for the browser-to-API-to-dashboard data flow.
+    - Explain Android foreground-service limits, offline recovery, status derivation, authorization, retention, and deletion.
   specs:
     - Use observable GIVEN/WHEN/THEN scenarios for happy paths, offline recovery, stale data, authorization, and deletion.
   tasks:

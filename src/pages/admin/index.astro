@@ -1,0 +1,8 @@
+---
+import AdminDashboard from '../../components/AdminDashboard.tsx';
+import AppLayout from '../../layouts/AppLayout.astro';
+---
+
+<AppLayout title="Manager dashboard" description="View device freshness, retained locations, and dated routes." active="admin">
+  <AdminDashboard client:load />
+</AppLayout>

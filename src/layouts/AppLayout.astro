@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  active: 'admin';
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#153f36" />
+    <meta name="description" content={description} />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>{title} · Field Track</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <a class="wordmark" href="/admin" aria-label="Field Track home">
+        <span class="wordmark-symbol" aria-hidden="true">FT</span>
+        <span>Field Track<small>Shift location operations</small></span>
+      </a>
+      <nav aria-label="Product areas">
+        <a href="/admin" aria-current="page">Manager dashboard</a>
+      </nav>
+    </header>
+    <main id="main-content"><slot /></main>
+    <footer class="site-footer">
+      <span>Field Track MVP</span>
+      <span>Managed Android devices report continuously; server policy controls retention.</span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "field-track",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-08-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "dist"
+  },
+  "vars": {
+    "DEMO_MODE": "true"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "field-track-local",
+      "database_id": "local-development-placeholder",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

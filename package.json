@@ -1,0 +1,33 @@
+{
+  "name": "field-track",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "wrangler dev",
+    "check": "astro check",
+    "test": "node --experimental-strip-types --test src/lib/*.test.ts",
+    "quality": "pnpm test && pnpm check && pnpm mobile:typecheck && pnpm build",
+    "mobile:start": "pnpm --filter @field-track/employee-mobile start",
+    "mobile:android": "pnpm --filter @field-track/employee-mobile android",
+    "mobile:typecheck": "pnpm --filter @field-track/employee-mobile typecheck"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "14.2.1",
+    "@astrojs/react": "6.0.2",
+    "astro": "7.2.1",
+    "maplibre-gl": "6.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "typescript": "6.0.3",
+    "wrangler": "4.122.0"
+  },
+  "packageManager": "pnpm@10.15.1"
+}
