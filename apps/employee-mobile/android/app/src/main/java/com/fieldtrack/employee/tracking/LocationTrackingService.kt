@@ -31,7 +31,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import org.json.JSONObject
-import java.time.Instant
 import java.util.UUID
 
 class LocationTrackingService : Service() {
@@ -87,7 +86,7 @@ class LocationTrackingService : Service() {
   }
 
   private fun recordLocation(location: Location) {
-    val recordedAt = Instant.ofEpochMilli(location.time).toString()
+    val recordedAt = isoUtc(location.time)
     val point = JSONObject()
       .put("id", UUID.randomUUID().toString())
       .put("employeeId", TrackingPreferences.employeeId(this))

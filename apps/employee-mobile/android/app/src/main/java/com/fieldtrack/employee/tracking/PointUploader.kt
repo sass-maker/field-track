@@ -4,7 +4,6 @@ import android.content.Context
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
-import java.time.Instant
 import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 
@@ -47,7 +46,7 @@ internal object PointUploader {
         val ids = (0 until accepted.length()).map { accepted.getString(it) }
         queue.remove(ids)
         payload.optString("policyId").takeIf { it.isNotBlank() }?.let { TrackingPreferences.setPolicyId(context, it) }
-        TrackingPreferences.setLastUploadedAt(context, Instant.now().toString())
+        TrackingPreferences.setLastUploadedAt(context, isoUtc())
         if (ids.isEmpty()) return
       } catch (_: Exception) {
         return
