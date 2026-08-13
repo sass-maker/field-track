@@ -17,7 +17,7 @@
 - [x] 3.2 Implement the Kotlin foreground location service, persistent notification, adaptive sampling, and battery metadata.
 - [x] 3.3 Implement native SQLite queueing, authenticated HTTPS batches, bounded retry, and acknowledgement deletion.
 - [x] 3.4 Add boot, app-update, task-removal, and enrolled-app restart paths.
-- [ ] 3.5 Verify TypeScript, Android lint/compile, and native unit checks available in the local environment.
+- [x] 3.5 Verify TypeScript, Android lint/compile, and native unit checks available in the local environment. (Hosted Java 21 CI passed `lintDebug`, `testDebugUnitTest`, and `assembleDebug`; the local machine has no Java runtime.)
 
 ## 4. Manager operations surface
 
