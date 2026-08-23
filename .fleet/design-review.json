@@ -2,7 +2,7 @@
   "$schema": "fleet.design-review.v1",
   "version": 1,
   "project": "field-track",
-  "target": "Manager employee onboarding and Android enrollment",
+  "target": "Public synthetic manager dashboard",
   "mode": "preserve",
   "register": "product",
   "context": {
@@ -14,21 +14,21 @@
     "probes": [],
     "selected": "existing-design",
     "approval": "not-required",
-    "before": "artifacts/design/before.png"
+    "before": "artifacts/design/before-public-demo.png"
   },
   "evidence": {
     "screenshots": [
       {
         "width": 390,
-        "path": "artifacts/design/after-390.png"
+        "path": "artifacts/design/after-public-demo-390.png"
       },
       {
         "width": 768,
-        "path": "artifacts/design/after-768.png"
+        "path": "artifacts/design/after-public-demo-768.png"
       },
       {
         "width": 1440,
-        "path": "artifacts/design/after-1440.png"
+        "path": "artifacts/design/after-public-demo-1440.png"
       }
     ],
     "projectCheck": {
@@ -36,11 +36,11 @@
       "status": "pass"
     },
     "critique": {
-      "score": 32,
+      "score": 36,
       "maximum": 40
     },
     "audit": {
-      "score": 16,
+      "score": 18,
       "maximum": 20
     },
     "unresolved": {
@@ -49,11 +49,13 @@
     },
     "detector": {
       "posture": "advisory",
-      "findings": []
+      "findings": [
+        "The map bundle remains above Vite's 500 kB advisory threshold; it is the primary dashboard artifact and did not block this demo release."
+      ]
     }
   },
   "ownerFeedback": {
     "decision": "delegated",
-    "note": "Owner explicitly delegated completing the dashboard and Android onboarding flow in the existing product direction."
+    "note": "Owner explicitly approved releasing the actual dashboard with Demo and Coming soon framing."
   }
 }

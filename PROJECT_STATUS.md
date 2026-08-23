@@ -1,6 +1,6 @@
 # field-track — PROJECT STATUS
 
-Last updated: 2026-08-12
+Last updated: 2026-08-23
 
 ## Why / What
 
@@ -40,6 +40,9 @@ cell-tower triangulation; strong anti-spoofing; one-second tracking.
   implemented with synthetic local demo mode and a Worker/D1 production path.
 - 2026-08-12 — Added administrator employee onboarding with a phone-bound,
   single-use code, Android active-SIM selection, and manager-visible SIM health.
+- 2026-08-23 — Prepared the actual manager dashboard as a credential-free public
+  demo with persistent synthetic-data and coming-soon framing. The public Worker
+  intentionally omits D1 and cannot read or mutate production employee data.
 
 ## Products
 
@@ -63,6 +66,8 @@ cell-tower triangulation; strong anti-spoofing; one-second tracking.
 - Admin-only employee creation and expiring code handoff; stable Android install
   identity; per-upload selected-SIM presence/carrier/number reporting and mismatch warnings.
 - Synthetic demo mode for credential-free local development.
+- Honest public-demo treatment for the real manager dashboard, with fictional
+  employee and route data and no production database binding.
 
 ## Work queue
 

@@ -34,10 +34,15 @@ const { title, description } = Astro.props;
         <a href="/admin" aria-current="page">Manager dashboard</a>
       </nav>
     </header>
+    <aside class="demo-status" aria-label="Public demo availability">
+      <strong><span aria-hidden="true"></span>Interactive synthetic demo</strong>
+      <p>Explore the real manager dashboard with fictional employees and routes.</p>
+      <span class="demo-status__availability">Managed Android rollout coming soon</span>
+    </aside>
     <main id="main-content"><slot /></main>
     <footer class="site-footer">
-      <span>Field Track MVP</span>
-      <span>Managed Android devices report continuously; server policy controls retention.</span>
+      <span>Field Track public demo</span>
+      <span>Synthetic data only · Production access coming soon</span>
     </footer>
   </body>
 </html>

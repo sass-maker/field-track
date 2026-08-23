@@ -8,15 +8,13 @@
     "binding": "ASSETS",
     "directory": "dist"
   },
+  "routes": [
+    {
+      "pattern": "field-track.sassmaker.com",
+      "custom_domain": true
+    }
+  ],
   "vars": {
     "DEMO_MODE": "true"
-  },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "field-track-local",
-      "database_id": "local-development-placeholder",
-      "migrations_dir": "migrations"
-    }
-  ]
+  }
 }
