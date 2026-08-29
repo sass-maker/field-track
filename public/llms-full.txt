@@ -1,0 +1,16 @@
+# Field Track full brief
+
+Field Track is a held MVP for managers of small field teams. It combines administrator-enrolled Android tracking, an offline native point queue, freshness-aware status, server-managed retention, route history, and a team-scoped manager dashboard.
+
+The employee app tracks continuously after enrollment. It does not expose start, stop, pause, or unenroll controls. Android's foreground-service notification remains visible. The system keeps no signal, stale signal, off duty, and server policy decisions distinct.
+
+The public dashboard is the real manager interface using fictional employees and routes. It has no production database binding. The MVP path works, but business economics and physical-device Android testing remain unresolved. There is no production rollout. Reopen only after a real-device pilot and the business case hold up.
+
+Machine surfaces:
+
+- https://field-track.sassmaker.com/
+- https://field-track.sassmaker.com/index.md
+- https://field-track.sassmaker.com/api/ai
+- https://field-track.sassmaker.com/openapi.json
+- https://field-track.sassmaker.com/robots.txt
+- https://field-track.sassmaker.com/sitemap.xml

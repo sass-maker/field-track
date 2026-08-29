@@ -2,7 +2,8 @@
   "$schema": "fleet.design-review.v1",
   "version": 1,
   "project": "field-track",
-  "target": "Public synthetic manager dashboard",
+  "target": "Field Track public synthetic manager dashboard",
+  "surfaceMode": "persuade",
   "mode": "preserve",
   "register": "product",
   "context": {
@@ -10,30 +11,63 @@
     "design": "DESIGN.md"
   },
   "direction": {
-    "references": [],
+    "references": [
+      "DESIGN.md operational dashboard contract",
+      "artifacts/design/landing-audit/final-1440.png",
+      "artifacts/design/landing-audit/final-390.png"
+    ],
     "probes": [],
-    "selected": "existing-design",
-    "approval": "not-required",
-    "before": "artifacts/design/before-public-demo.png"
+    "selected": "existing-field-track-operational-system",
+    "approval": "agent-selected",
+    "before": "artifacts/design/landing-audit/current-1440.png",
+    "library": {
+      "strategy": "upstream-first",
+      "primary": "existing-project-system",
+      "sources": [
+        "https://maplibre.org/maplibre-gl-js/docs/",
+        "https://sassmaker.com/project-strip.js",
+        "https://sassmaker.com/ai-chat-footer.js"
+      ],
+      "runtime": "existing",
+      "customReplacement": {
+        "used": false,
+        "authorization": "not-required",
+        "reason": "The existing product dashboard was already the strongest proof surface. This pass preserved it, corrected the product contract, added shared footer components, and isolated MapLibre from the initial dashboard bundle."
+      }
+    },
+    "contract": {
+      "purpose": "Explain and demonstrate a held, administrator-managed field-location system for continuously enrolled Android devices and freshness-aware route review.",
+      "purposeSource": "PRODUCT.md, PROJECT_STATUS.md, AGENTS.md, and the canonical Site Health project dossier",
+      "canonicalPurpose": "Field Track lets a manager locate employees carrying administrator-enrolled Android phones and review retained routes while tracking remains visible through Android's ongoing notification.",
+      "purposeAlignment": "repository-override",
+      "driftNote": "The older dossier described employee-controlled work-period sharing. Current repository contracts explicitly require continuous tracking after administrator enrollment with no employee start, stop, pause, or unenroll controls; the canonical catalog and generated SaaS Maker projection were corrected in this audit.",
+      "audience": "Managers of small field teams using managed, low-end Android phones in intermittent 4G conditions.",
+      "job": "Judge location freshness, inspect retained routes and gaps, understand device and retention state, and decide whether the held MVP merits economics and physical-device validation.",
+      "thesis": "The real synthetic manager dashboard is better product evidence than a separate marketing page when its managed-tracking boundary and held lifecycle are visible before the operational UI.",
+      "system": "Dense cream-and-forest operational surfaces, non-color status labels, accessible roster fallback, MapLibre map evidence, restrained warning amber, and shared Fleet footer components.",
+      "signature": "Freshness, route gaps, SIM health, and server retention are visible together without pretending synthetic data or untested Android delivery is production proof.",
+      "risk": "A polished dashboard could imply employee consent controls or production readiness, so the first viewport must state the continuous managed-tracking boundary, synthetic data, and unresolved economics and real-device testing."
+    }
   },
   "evidence": {
     "screenshots": [
       {
         "width": 390,
-        "path": "artifacts/design/after-public-demo-390.png"
+        "path": "artifacts/design/landing-audit/final-390.png"
       },
       {
         "width": 768,
-        "path": "artifacts/design/after-public-demo-768.png"
+        "path": "artifacts/design/landing-audit/final-768.png"
       },
       {
         "width": 1440,
-        "path": "artifacts/design/after-public-demo-1440.png"
+        "path": "artifacts/design/landing-audit/final-1440.png"
       }
     ],
     "projectCheck": {
       "command": "pnpm quality",
-      "status": "pass"
+      "status": "pass",
+      "note": "Five server tests, Astro diagnostics, Android TypeScript checks, and the Cloudflare Worker build pass. Production-mode browser checks load the map worker and shared module without missing assets."
     },
     "critique": {
       "score": 36,
@@ -50,12 +84,36 @@
     "detector": {
       "posture": "advisory",
       "findings": [
-        "The map bundle remains above Vite's 500 kB advisory threshold; it is the primary dashboard artifact and did not block this demo release."
+        "Baseline independent review found two P1 truth defects: the page omitted the continuous administrator-managed tracking boundary and implied a generic coming-soon lifecycle. Both are resolved.",
+        "Residual P2: the operational mobile page is long because it preserves the full map, roster, selected-employee detail, and explicit product boundaries.",
+        "Residual P2: MapLibre remains a large deferred chunk, but it no longer inflates the initial dashboard bundle and its worker assets are explicitly available."
       ]
+    },
+    "comprehension": {
+      "status": "pass",
+      "reviewer": "Independent fresh-visitor baseline and revised review by Harvey",
+      "answers": {
+        "product": "Field Track is a held manager system for continuous location tracking on administrator-enrolled Android devices.",
+        "audience": "It is for managers of small field teams using managed phones in weak-network conditions.",
+        "value": "It helps a manager find employees quickly and review retained routes, freshness, device state, and gaps.",
+        "mechanism": "The Android app tracks continuously after enrollment, keeps a visible notification, queues points through weak 4G, and lets server policy decide retention.",
+        "proof": "The real manager dashboard works with clearly labeled synthetic employees and routes; economics and physical Android testing remain unresolved.",
+        "nextAction": "Review the synthetic held MVP, then validate economics and a real Android device before onboarding or expansion."
+      },
+      "purposeScore": {
+        "product": 25,
+        "audience": 15,
+        "value": 15,
+        "mechanism": 15,
+        "proof": 10,
+        "nextAction": 14,
+        "total": 94
+      },
+      "mismatches": []
     }
   },
   "ownerFeedback": {
-    "decision": "delegated",
-    "note": "Owner explicitly approved releasing the actual dashboard with Demo and Coming soon framing."
+    "decision": "agent-selected",
+    "note": "The operator delegated priority-aware end-to-end landing qualification without repeated approval loops. This receipt records a qualified local P2 candidate, not deployment authorization."
   }
 }

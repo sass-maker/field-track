@@ -1,0 +1,18 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Field Track public agent surfaces",
+    "version": "1.0.0",
+    "description": "Read-only descriptions of the Field Track synthetic manager demo."
+  },
+  "servers": [{ "url": "https://field-track.sassmaker.com" }],
+  "paths": {
+    "/api/ai": {
+      "get": {
+        "operationId": "getFieldTrackAgentCatalog",
+        "summary": "Get the public Field Track surface catalog",
+        "responses": { "200": { "description": "JSON catalog" } }
+      }
+    }
+  }
+}

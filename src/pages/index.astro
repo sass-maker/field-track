@@ -1,3 +1,12 @@
 ---
-return Astro.redirect('/admin');
+import AdminDashboard from '../components/AdminDashboard.tsx';
+import AppLayout from '../layouts/AppLayout.astro';
 ---
+
+<AppLayout
+  title="Field Track · Managed field-location demo"
+  description="A held MVP for managers to review fresh locations and retained routes from administrator-enrolled Android phones."
+  active="admin"
+>
+  <AdminDashboard client:load />
+</AppLayout>

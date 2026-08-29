@@ -46,6 +46,9 @@ a { color: inherit; }
 .demo-status strong span { width: 8px; height: 8px; border: 2px solid #244335; border-radius: 50%; background: var(--lime); }
 .demo-status p { margin: 0; color: #445d52; }
 .demo-status__availability { margin-left: auto; padding-left: 1.4rem; border-left: 1px solid #cad49b; color: #244335; font-weight: 700; }
+.tracking-boundary { display: flex; align-items: baseline; gap: .65rem 1rem; padding: .65rem 4vw; color: #f4f1e8; background: #213d35; border-bottom: 1px solid rgb(255 255 255 / 12%); font-size: .76rem; }
+.tracking-boundary strong { flex: none; font-family: Manrope, sans-serif; }
+.tracking-boundary p { margin: 0; color: #cad8d2; }
 
 main { min-height: calc(100vh - 142px); }
 .dashboard-shell { width: min(1500px, 94vw); margin: 0 auto; padding: 3.25rem 0 4rem; }
@@ -97,6 +100,7 @@ h2 { font-size: clamp(1.4rem, 2.3vw, 2.1rem); }
 .map-panel, .roster-panel, .detail-panel { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
 .map-panel { position: relative; min-height: 570px; }
 .map-canvas { width: 100%; height: 100%; min-height: 570px; background: #dbe3dc; }
+.map-loading { display: grid; place-items: center; color: var(--muted); font-size: .875rem; }
 .map-caption { position: absolute; z-index: 2; bottom: .7rem; left: .7rem; max-width: 440px; margin: 0; padding: .5rem .7rem; border: 1px solid rgb(0 0 0 / 8%); border-radius: 7px; color: #43524b; background: rgb(255 253 248 / 94%); font-size: .69rem; }
 .map-marker { width: 22px; height: 22px; padding: 0; border: 3px solid white; border-radius: 50%; background: var(--green-2); box-shadow: 0 4px 12px rgb(21 63 54 / 32%); cursor: pointer; }
 .map-marker.status-stale { background: var(--amber); }
@@ -167,6 +171,7 @@ h2 { font-size: clamp(1.4rem, 2.3vw, 2.1rem); }
   .demo-status { align-items: flex-start; flex-direction: column; gap: .25rem; padding: .8rem 4vw; }
   .demo-status p { max-width: 46ch; }
   .demo-status__availability { margin-left: 0; padding-left: 0; border-left: 0; }
+  .tracking-boundary { align-items: flex-start; flex-direction: column; gap: .25rem; padding: .75rem 4vw; }
   .dashboard-shell { width: 92vw; padding: 2.2rem 0 3rem; }
   .dashboard-header, .detail-heading { align-items: start; flex-direction: column; }
   .header-actions { width: 100%; justify-items: start; }

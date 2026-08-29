@@ -1,8 +1,4 @@
-import * as maplibregl from 'maplibre-gl';
-import type { Map as MapLibreMap, Marker } from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
-import mapLibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
-import { useCallback, useEffect, useMemo, useRef, useState, type SyntheticEvent } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type SyntheticEvent } from 'react';
 import type {
   EmployeeLocation, LiveRosterResponse, OnboardingOptionsResponse, OnboardingResult,
   RouteSummary, TrackingPolicy,
@@ -13,7 +9,7 @@ const operationalStatus = (employee: EmployeeLocation): keyof typeof statusLabel
 const enrollmentLabel = { 'not-enrolled': 'Not enrolled', 'never-seen': 'Enrolled · waiting', reporting: 'Reporting' } as const;
 const simLabel = { ok: 'SIM matches', absent: 'Selected SIM absent', 'number-unavailable': 'SIM number unavailable', mismatch: 'SIM number mismatch', 'not-reported': 'SIM not reported' } as const;
 
-maplibregl.setWorkerUrl(mapLibreWorkerUrl);
+const EmployeeMap = lazy(() => import('./EmployeeMap.tsx'));
 
 function relativeTime(value: string | null, now: number) {
   if (!value) return 'No location';
@@ -22,71 +18,6 @@ function relativeTime(value: string | null, now: number) {
   if (minutes === 1) return '1 min ago';
   if (minutes < 60) return `${minutes} min ago`;
   return `${Math.floor(minutes / 60)} hr ago`;
-}
-
-function EmployeeMap({ employees, selectedId, route, onSelect }: {
-  employees: EmployeeLocation[]; selectedId: string | null; route: RouteSummary | null;
-  onSelect: (id: string) => void;
-}) {
-  const container = useRef<HTMLDivElement>(null);
-  const map = useRef<MapLibreMap | null>(null);
-  const markers = useRef<Marker[]>([]);
-
-  useEffect(() => {
-    if (!container.current || map.current) return;
-    const instance = new maplibregl.Map({
-      container: container.current,
-      center: [77.209, 28.6139], zoom: 9.5,
-      style: {
-        version: 8,
-        sources: { osm: { type: 'raster', tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap contributors' } },
-        layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
-      },
-    });
-    instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
-    map.current = instance;
-    return () => { map.current?.remove(); map.current = null; };
-  }, []);
-
-  useEffect(() => {
-    if (!map.current) return;
-    markers.current.forEach((marker) => marker.remove());
-    markers.current = employees.flatMap((employee) => {
-      if (employee.latitude === null || employee.longitude === null) return [];
-      const element = document.createElement('button');
-      element.type = 'button';
-      const currentStatus = operationalStatus(employee);
-      element.className = `map-marker status-${currentStatus}${selectedId === employee.employeeId ? ' selected' : ''}`;
-      element.setAttribute('aria-label', `${employee.name}, ${statusLabel[currentStatus]}`);
-      element.addEventListener('click', () => onSelect(employee.employeeId));
-      return [new maplibregl.Marker({ element }).setLngLat([employee.longitude, employee.latitude]).addTo(map.current!)];
-    });
-  }, [employees, onSelect, selectedId]);
-
-  useEffect(() => {
-    const current = map.current;
-    if (!current) return;
-    const update = () => {
-      if (current.getLayer('employee-route')) current.removeLayer('employee-route');
-      if (current.getSource('employee-route')) current.removeSource('employee-route');
-      if (!route || route.points.length < 2) return;
-      current.addSource('employee-route', {
-        type: 'geojson',
-        data: { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: route.points.map((point) => [point.longitude, point.latitude]) } },
-      });
-      current.addLayer({ id: 'employee-route', type: 'line', source: 'employee-route', paint: { 'line-color': '#146b55', 'line-width': 5, 'line-opacity': 0.85 } });
-      const bounds = route.points.reduce((value, point) => value.extend([point.longitude, point.latitude]), new maplibregl.LngLatBounds());
-      current.fitBounds(bounds, { padding: 70, maxZoom: 14 });
-    };
-    current.loaded() ? update() : current.once('load', update);
-    return () => {
-      if (!current.getStyle()) return;
-      if (current.getLayer('employee-route')) current.removeLayer('employee-route');
-      if (current.getSource('employee-route')) current.removeSource('employee-route');
-    };
-  }, [route]);
-
-  return <div ref={container} className="map-canvas" aria-label="Employee location map" />;
 }
 
 export default function AdminDashboard({ initialEmployeeId = null }: { initialEmployeeId?: string | null }) {
@@ -238,7 +169,7 @@ export default function AdminDashboard({ initialEmployeeId = null }: { initialEm
 
   return <section className="dashboard-shell">
     <header className="dashboard-header">
-      <div><p className="eyebrow">Operations overview</p><h1>Field team, right now.</h1><p>Freshness is calculated from the employee’s last recorded point.</p></div>
+      <div><p className="eyebrow">Operations overview</p><h1>Field team, right now.</h1><p>For managers of small field teams: review fresh locations and retained routes from enrolled Android phones. Freshness comes from each phone’s last recorded point.</p></div>
       <div className="header-actions">
         {!onboardingForbidden && <button type="button" className="primary-button" disabled={onboardingOptionsLoading} onClick={() => onboardingOptionsError ? void loadOnboardingOptions() : (setShowOnboarding(true), setOnboardingResult(null))}>{onboardingOptionsError ? 'Retry onboarding' : onboardingOptionsLoading ? 'Loading onboarding…' : 'Onboard employee'}</button>}
         <div className="refresh-state" aria-live="polite"><span className={error || onboardingOptionsError ? 'error-dot' : ''} />{onboardingOptionsError ? 'Onboarding unavailable. Retry.' : error ?? `Updated ${relativeTime(roster?.generatedAt ?? null, clock)}`}</div>
@@ -286,7 +217,9 @@ export default function AdminDashboard({ initialEmployeeId = null }: { initialEm
 
     <div className="operations-grid">
       <div className="map-panel">
-        <EmployeeMap employees={employees} selectedId={selectedId} route={route} onSelect={setSelectedId} />
+        <Suspense fallback={<div className="map-canvas map-loading" role="status">Loading map…</div>}>
+          <EmployeeMap employees={employees} selectedId={selectedId} route={route} onSelect={setSelectedId} />
+        </Suspense>
         <p className="map-caption">Map tiles are a visual aid. The roster remains the accessible source of status and freshness.</p>
       </div>
       <div className="roster-panel">

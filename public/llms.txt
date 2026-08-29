@@ -1,0 +1,19 @@
+# Field Track
+
+> A held MVP for managers to review fresh locations and retained routes from administrator-enrolled Android phones.
+
+## Product
+
+- [Interactive synthetic demo](https://field-track.sassmaker.com/): The real manager dashboard with fictional employees and routes
+- [Markdown brief](https://field-track.sassmaker.com/index.md): Product, tracking boundary, proof, and lifecycle
+
+## Machine surfaces
+
+- [Agent catalog](https://field-track.sassmaker.com/api/ai)
+- [OpenAPI description](https://field-track.sassmaker.com/openapi.json)
+- [Sitemap](https://field-track.sassmaker.com/sitemap.xml)
+- [Robots policy](https://field-track.sassmaker.com/robots.txt)
+
+## Important boundary
+
+Administrator-enrolled devices track continuously without employee start, stop, pause, or unenroll controls. Android keeps its ongoing location notification visible. The public site contains synthetic data only; economics and physical Android validation remain open.

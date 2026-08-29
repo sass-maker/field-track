@@ -1,8 +1,8 @@
 {
   "name": "Field Track",
   "short_name": "Field Track",
-  "description": "Shift-bound field employee location tracking.",
-  "start_url": "/employee",
+  "description": "Continuous managed Android field tracking with freshness-aware manager route review.",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f4f1e8",
   "theme_color": "#153f36"

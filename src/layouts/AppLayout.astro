@@ -8,6 +8,32 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const canonical = new URL('/', 'https://field-track.sassmaker.com');
+const socialImage = new URL('/social.jpg', canonical);
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${canonical.href}#site`,
+      name: 'Field Track',
+      url: canonical.href,
+      description,
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical.href}#demo`,
+      name: 'Field Track synthetic manager demo',
+      url: canonical.href,
+      description,
+      isPartOf: { '@id': `${canonical.href}#site` },
+      audience: {
+        '@type': 'Audience',
+        audienceType: 'Managers of small field teams using managed Android phones',
+      },
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -17,10 +43,28 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#153f36" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="text/markdown" href={new URL('/index.md', canonical)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <title>{title} · Field Track</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Field Track" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Field Track synthetic manager dashboard with location freshness, a route map, and an employee roster." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <title>{title}</title>
     <script is:inline>
-      !function(t,e){var o,n,a,r,i;function s(e){(o=t._phq=t._phq||[]).push([].slice.call(e))}o=t.posthog=function(e,n){s([e,n])},o.__loaded||(a=e.createElement("script"),a.type="text/javascript",a.async=!0,a.crossOrigin="anonymous",a.src="https://us.i.posthog.com/array.js",r=e.getElementsByTagName("script")[0],r.parentNode.insertBefore(a,r),o.__loaded=!0),t.posthog.init("phc_qgiAarw4Co4pw9fz3Fxj4UJaHmqzFetqs4JrXhGc35Nd",{api_host:"https://us.i.posthog.com",person_profiles:"always",capture_pageview:!1,autocapture:!1,loaded:function(){t.posthog.capture("page_view",{project_id:"field-track"})}})}(window,document);
+      !function(t,e){var o,a,r;function s(e){(o=t._phq=t._phq||[]).push([].slice.call(e))}o=t.posthog=function(e,n){s([e,n])},o.__loaded||(a=e.createElement("script"),a.type="text/javascript",a.async=!0,a.crossOrigin="anonymous",a.src="https://us.i.posthog.com/array.js",r=e.getElementsByTagName("script")[0],r.parentNode.insertBefore(a,r),o.__loaded=!0),t.posthog.init("phc_qgiAarw4Co4pw9fz3Fxj4UJaHmqzFetqs4JrXhGc35Nd",{api_host:"https://us.i.posthog.com",person_profiles:"always",capture_pageview:!1,autocapture:!1,loaded:function(){t.posthog.capture("page_view",{project_id:"field-track"})}})}(window,document);
     </script>
   </head>
   <body>
@@ -37,12 +81,16 @@ const { title, description } = Astro.props;
     <aside class="demo-status" aria-label="Public demo availability">
       <strong><span aria-hidden="true"></span>Interactive synthetic demo</strong>
       <p>Explore the real manager dashboard with fictional employees and routes.</p>
-      <span class="demo-status__availability">Managed Android rollout coming soon</span>
+      <span class="demo-status__availability">Held: economics + real-device testing open</span>
+    </aside>
+    <aside class="tracking-boundary" aria-label="Managed tracking boundary">
+      <strong>Managed tracking boundary</strong>
+      <p>After administrator enrollment, the employee app has no start, stop, pause, or unenroll control. Android keeps its location notification visible. The phone queues points through weak 4G; server policy decides which points count as on duty.</p>
     </aside>
     <main id="main-content"><slot /></main>
     <footer class="site-footer">
       <span>Field Track public demo</span>
-      <span>Synthetic data only · Production access coming soon</span>
+      <span>Synthetic data only · Economics and physical Android testing remain open</span>
     </footer>
     <script
       is:inline
@@ -54,6 +102,7 @@ const { title, description } = Astro.props;
       is:inline
       src="https://sassmaker.com/ai-chat-footer.js"
       data-name="Field Track"
+      data-compose="false"
       defer
     ></script>
   </body>
