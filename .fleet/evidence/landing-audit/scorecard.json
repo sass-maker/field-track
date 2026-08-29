@@ -1,0 +1,41 @@
+{
+  "$schema": "fleet.landing-audit.v1",
+  "project": "field-track",
+  "priority": "P2",
+  "decision": "Hold",
+  "auditedAt": "2026-08-28",
+  "candidateUrl": "http://127.0.0.1:4399/",
+  "productionUrl": "https://field-track.sassmaker.com/",
+  "releaseState": "Local candidate qualified; product-contract, metadata, agent-index, footer, map-delivery, and performance changes are not deployed by this audit.",
+  "gates": {
+    "contentPurpose": {
+      "score": 94,
+      "status": "pass",
+      "evidence": "Independent revised review scored product 25/25, audience 15/15, value 15/15, mechanism 15/15, proof 10/15, and next action 14/15. The page now states continuous administrator-managed tracking, the visible Android notification, weak-4G queuing, server retention, synthetic proof, and the held economics/device gates."
+    },
+    "designQuality": {
+      "score": 90,
+      "status": "pass",
+      "evidence": "The existing operational dashboard remains the proof surface across 390, 768, and 1440 widths. Independent review found zero P0/P1 defects. Shared Ask AI and project-strip footers are both present; the residual P2 is mobile page length."
+    },
+    "seo": {
+      "score": 100,
+      "status": "pass",
+      "evidence": "Candidate passes 15/15 on-page checks with title, description, canonical, Open Graph image, Twitter card, JSON-LD, heading hierarchy, sufficient copy, clean links, favicon, and an accurate manifest."
+    },
+    "geo": {
+      "score": 100,
+      "status": "pass",
+      "evidence": "Candidate source provides llms.txt, llms-full.txt, index.md, api/ai, robots, sitemap, OpenAPI, and JSON-LD with crawler access and Markdown coverage. Astro dev audit reached S-tier 100. Wrangler local preview rewrites request.url to the production hostname, so its local-only audit treats correct production links as foreign; production remains unverified until deployment."
+    },
+    "performance": {
+      "score": 98,
+      "status": "pass",
+      "evidence": "Serial production-mode 20-run psi-swarm completed 20/20 with good aggregate LCP p75 1.96 s, balanced weighted LCP 1.17 s, CLS 0.005, and TBT 2 ms. Slow-4G mobile scores 99 and desktop 100. MapLibre is isolated from the 16 KB dashboard entry and its worker assets return 200; extreme slow-3G remains 84.",
+      "report": ".fleet/evidence/landing-audit/psi-swarm.html"
+    }
+  },
+  "nonCompensating": true,
+  "minimumGate": 90,
+  "minimumObserved": 90
+}
