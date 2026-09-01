@@ -1,6 +1,6 @@
 # field-track — PROJECT STATUS
 
-Last updated: 2026-08-23
+Last updated: 2026-09-01
 
 ## Why / What
 
@@ -35,6 +35,9 @@ cell-tower triangulation; strong anti-spoofing; one-second tracking.
 
 ## Timeline
 
+- 2026-09-01 — Added Microsoft Clarity to the credential-free synthetic manager
+  demo only. The public Worker remains unbound from production D1, and the
+  native employee application is excluded.
 - 2026-08-12 — Private repository and product planning scaffold created.
 - 2026-08-12 — React Native/Kotlin Android collector and Astro manager MVP
   implemented with synthetic local demo mode and a Worker/D1 production path.
