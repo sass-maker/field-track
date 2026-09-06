@@ -152,6 +152,8 @@ h2 { font-size: clamp(1.4rem, 2.3vw, 2.1rem); }
 .secondary-button { border: 1px solid var(--line); background: white; }
 
 .site-footer { min-height: 66px; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0 4vw; border-top: 1px solid var(--line); color: var(--muted); font-size: .72rem; }
+.site-footer-github { display: inline-flex; align-items: center; flex: none; color: var(--muted); }
+.site-footer-github:hover { color: var(--green-2); }
 
 @media (max-width: 1000px) {
   .operations-grid { grid-template-columns: 1fr; }
