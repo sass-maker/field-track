@@ -142,3 +142,14 @@ Before a real deployment:
 
 No real employee, credential, signing key, or production location data belongs
 in this repository.
+
+<!-- portfolio-retained-work:2026-09-07 -->
+## Retained work from the portfolio review
+
+These are unresolved requirements retained at the owner’s request. They are not completed features. This project is inactive; this list is reference material, not an active roadmap.
+
+### Verify Android debug APK on physical pilot devices
+
+Verify the Android APK on actual pilot hardware, including location continuity, foreground notification, offline recovery and manager visibility.
+
+Original requirements and discussion: [#2](https://github.com/sass-maker/field-track/issues/2).
