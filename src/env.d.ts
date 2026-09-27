@@ -24,6 +24,8 @@ interface D1Database {
 type RuntimeEnv = {
   DB?: D1Database;
   DEMO_MODE?: string;
+  APP_HEALTH_INGEST_KEY?: string;
+  APP_HEALTH_ENVIRONMENT?: string;
 };
 
 interface Env extends RuntimeEnv {}

@@ -1,6 +1,8 @@
+import { env } from 'cloudflare:workers';
 import type { APIRoute } from 'astro';
 import { hashToken } from '../../../lib/server/access.ts';
 import { databaseFrom, json, problem, readJson } from '../../../lib/server/http.ts';
+import { createPing } from '../../../lib/server/ping.ts';
 import { normalizePhoneNumber, type SimSnapshot } from '../../../lib/onboarding.ts';
 
 type EnrollBody = { enrollmentCode?: string; installId?: string; selectedSim?: SimSnapshot };
@@ -65,6 +67,16 @@ export const POST: APIRoute = async ({ request, locals }) => {
   } catch {
     return problem(401, 'Enrollment code is invalid, expired, or already used.');
   }
+  const bindings = env as RuntimeEnv;
+  const ping = createPing({
+    ...(bindings.APP_HEALTH_INGEST_KEY ? { key: bindings.APP_HEALTH_INGEST_KEY } : {}),
+    environment: bindings.APP_HEALTH_ENVIRONMENT,
+  });
+  void ping('device.enrolled', {
+    title: enrollment.employeeName,
+    icon: '📱',
+    props: { policyId: enrollment.policyId, simMismatch },
+  });
   return json({
     employeeId: enrollment.employeeId,
     employeeName: enrollment.employeeName,
