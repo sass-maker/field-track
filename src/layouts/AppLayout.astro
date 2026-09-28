@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import appHealthLogClient from '../../public/app-health-log.js?raw';
 
 interface Props {
   title: string;
@@ -9,8 +10,12 @@ interface Props {
 
 const { title, description } = Astro.props;
 const isPublicDemoRoute = Astro.url.pathname === '/' || Astro.url.pathname === '/admin';
-const appHealthBrowserKey = import.meta.env.PUBLIC_APP_HEALTH_BROWSER_KEY;
-const appHealthProjectId = import.meta.env.PUBLIC_APP_HEALTH_PROJECT_ID;
+const appHealthBrowserKey =
+  import.meta.env.PUBLIC_APP_HEALTH_BROWSER_KEY ||
+  appHealthLogClient.match(/\bvar KEY\s*=\s*'([^']+)'/)?.[1];
+const appHealthProjectId =
+  import.meta.env.PUBLIC_APP_HEALTH_PROJECT_ID ||
+  'app-import-46ac72dfc667b9d81271234f35cc955a7b7418c3818af5cf56fab3d0b803f830';
 const canonical = new URL('/', 'https://field-track.sassmaker.com');
 const socialImage = new URL('/social.jpg', canonical);
 const structuredData = {
@@ -113,7 +118,7 @@ const structuredData = {
     <footer class="site-footer">
       <span>Field Track public demo</span>
       <span>Synthetic data only · Economics and physical Android testing remain open</span>
-      <span>Analytics run only on the public demo routes. App Health measures session-level visits and manager-dashboard navigation; it receives no employee records or location data.</span>
+      <span>Analytics run only on the public demo routes. App Health measures visits, dashboard navigation, and CTA event names; it receives no employee records or location data.</span>
       <a
         class="site-footer-github"
         href="https://github.com/sass-maker/field-track"
@@ -128,6 +133,12 @@ const structuredData = {
       is:inline
       src="https://sassmaker.com/project-strip.js"
       data-project="field-track"
+      defer
+    ></script>
+    <script
+      is:inline
+      src="https://sassmaker.com/ai-chat-footer.js"
+      data-name="Field Track"
       defer
     ></script>
   </body>
