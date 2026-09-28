@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import appHealthLogClient from '../../public/app-health-log.js?raw';
 
 interface Props {
   title: string;
@@ -12,7 +11,7 @@ const { title, description } = Astro.props;
 const isPublicDemoRoute = Astro.url.pathname === '/' || Astro.url.pathname === '/admin';
 const appHealthBrowserKey =
   import.meta.env.PUBLIC_APP_HEALTH_BROWSER_KEY ||
-  appHealthLogClient.match(/\bvar KEY\s*=\s*'([^']+)'/)?.[1];
+  'ahk_pub_5507d54461c7334fa54d481c24cb8a9f48c284f948598c2fe6d52f60fb7d2aff';
 const appHealthProjectId =
   import.meta.env.PUBLIC_APP_HEALTH_PROJECT_ID ||
   'app-import-46ac72dfc667b9d81271234f35cc955a7b7418c3818af5cf56fab3d0b803f830';
