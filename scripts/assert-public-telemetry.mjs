@@ -41,13 +41,16 @@ try {
   if (!publicResponse.ok || !publicHtml.includes('https://health.sassmaker.com/tracker.js')) {
     throw new Error('Public /admin is missing the App Health tracker');
   }
+  if (!/data-key="ahk_pub_[^"]+"/.test(publicHtml)) {
+    throw new Error('Public /admin is missing its App Health browser key');
+  }
   if (!publicHtml.includes('app-import-46ac72dfc667b9d81271234f35cc955a7b7418c3818af5cf56fab3d0b803f830')) {
     throw new Error('Public /admin is missing its configured App Health project');
   }
 
   const privateResponse = await fetch(`http://127.0.0.1:${port}/admin/employees/emp-001`);
   const privateHtml = await privateResponse.text();
-  if (!privateResponse.ok || privateHtml.includes('https://health.sassmaker.com/tracker.js')) {
+  if (!privateResponse.ok || privateHtml.includes('https://health.sassmaker.com/tracker.js') || /data-key="ahk_pub_[^"]+"/.test(privateHtml)) {
     throw new Error('Private employee route should render without the App Health tracker');
   }
 
