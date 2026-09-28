@@ -171,7 +171,7 @@ export default function AdminDashboard({ initialEmployeeId = null }: { initialEm
     <header className="dashboard-header">
       <div><p className="eyebrow">Operations overview</p><h1>Field team, right now.</h1><p>For managers of small field teams: review fresh locations and retained routes from enrolled Android phones. Freshness comes from each phone’s last recorded point.</p></div>
       <div className="header-actions">
-        {!onboardingForbidden && <button type="button" className="primary-button" disabled={onboardingOptionsLoading} onClick={() => onboardingOptionsError ? void loadOnboardingOptions() : (setShowOnboarding(true), setOnboardingResult(null))}>{onboardingOptionsError ? 'Retry onboarding' : onboardingOptionsLoading ? 'Loading onboarding…' : 'Onboard employee'}</button>}
+        {!onboardingForbidden && <button type="button" className="primary-button" data-app-health-event="employee_onboarding_opened" disabled={onboardingOptionsLoading} onClick={() => onboardingOptionsError ? void loadOnboardingOptions() : (setShowOnboarding(true), setOnboardingResult(null))}>{onboardingOptionsError ? 'Retry onboarding' : onboardingOptionsLoading ? 'Loading onboarding…' : 'Onboard employee'}</button>}
         <div className="refresh-state" aria-live="polite"><span className={error || onboardingOptionsError ? 'error-dot' : ''} />{onboardingOptionsError ? 'Onboarding unavailable. Retry.' : error ?? `Updated ${relativeTime(roster?.generatedAt ?? null, clock)}`}</div>
       </div>
     </header>
