@@ -10,7 +10,8 @@
     "preview": "wrangler dev",
     "check": "astro check",
     "test": "node --experimental-strip-types --test src/lib/*.test.ts",
-    "quality": "pnpm test && pnpm check && pnpm mobile:typecheck && pnpm build",
+    "quality": "pnpm test && pnpm check && pnpm mobile:typecheck && pnpm build && pnpm test:public-telemetry",
+    "test:public-telemetry": "node scripts/assert-public-telemetry.mjs",
     "mobile:start": "pnpm --filter @field-track/employee-mobile start",
     "mobile:android": "pnpm --filter @field-track/employee-mobile android",
     "mobile:typecheck": "pnpm --filter @field-track/employee-mobile typecheck"

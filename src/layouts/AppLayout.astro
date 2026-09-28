@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import appHealthLogClient from '../../public/app-health-log.js?raw';
 
 interface Props {
   title: string;
@@ -9,8 +10,12 @@ interface Props {
 
 const { title, description } = Astro.props;
 const isPublicDemoRoute = Astro.url.pathname === '/' || Astro.url.pathname === '/admin';
-const appHealthBrowserKey = import.meta.env.PUBLIC_APP_HEALTH_BROWSER_KEY;
-const appHealthProjectId = import.meta.env.PUBLIC_APP_HEALTH_PROJECT_ID;
+const appHealthBrowserKey =
+  import.meta.env.PUBLIC_APP_HEALTH_BROWSER_KEY ||
+  appHealthLogClient.match(/\bvar KEY\s*=\s*'([^']+)'/)?.[1];
+const appHealthProjectId =
+  import.meta.env.PUBLIC_APP_HEALTH_PROJECT_ID ||
+  'app-import-46ac72dfc667b9d81271234f35cc955a7b7418c3818af5cf56fab3d0b803f830';
 const canonical = new URL('/', 'https://field-track.sassmaker.com');
 const socialImage = new URL('/social.jpg', canonical);
 const structuredData = {
