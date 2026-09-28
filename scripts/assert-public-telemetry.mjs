@@ -47,14 +47,20 @@ try {
   if (!publicHtml.includes('app-import-46ac72dfc667b9d81271234f35cc955a7b7418c3818af5cf56fab3d0b803f830')) {
     throw new Error('Public /admin is missing its configured App Health project');
   }
+  if (publicHtml.includes('data-feedback="false"')) {
+    throw new Error('Public /admin should retain its feedback launcher');
+  }
 
   const privateResponse = await fetch(`http://127.0.0.1:${port}/admin/employees/emp-001`);
   const privateHtml = await privateResponse.text();
   if (!privateResponse.ok || privateHtml.includes('https://health.sassmaker.com/tracker.js') || /data-key="ahk_pub_[^"]+"/.test(privateHtml)) {
     throw new Error('Private employee route should render without the App Health tracker');
   }
+  if (!privateHtml.includes('data-feedback="false"')) {
+    throw new Error('Private employee route should not mount the shared feedback launcher');
+  }
 
-  process.stdout.write('Public /admin tracker present; private employee route tracker absent.\n');
+  process.stdout.write('Public /admin tracker and feedback present; private employee route tracker and feedback absent.\n');
 } finally {
   server.kill('SIGTERM');
 }
