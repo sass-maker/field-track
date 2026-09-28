@@ -64,6 +64,11 @@
     'click',
     function (e) {
       var t = e.target && e.target.closest ? e.target.closest('[data-log]') : null;
+      var tracked = e.target && e.target.closest ? e.target.closest('[data-app-health-event]') : null;
+      var trackedName = tracked && tracked.getAttribute('data-app-health-event');
+      if (trackedName && window.appHealth && typeof window.appHealth.track === 'function') {
+        window.appHealth.track(trackedName);
+      }
       var name = t && t.getAttribute('data-log');
       if (name)
         send(name, {
