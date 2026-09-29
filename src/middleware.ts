@@ -47,27 +47,26 @@ function recordRequest(
   status: number,
   startedAt: number,
 ): void {
-  const bindings = env as RuntimeEnv;
-
-  let client: AppHealthClient | null;
   try {
-    client = clientFor(bindings);
+    const bindings = env as RuntimeEnv;
+    const client = clientFor(bindings);
+    if (!client) return;
+
+    client.record({
+      method: context.request.method,
+      route: context.routePattern,
+      status_code: status,
+      duration_ms: Math.max(0, Math.round(performance.now() - startedAt)),
+    });
+
+    const delivery = client.flush();
+    try {
+      context.locals.cfContext.waitUntil(delivery);
+    } catch {
+      void delivery.catch(() => {});
+    }
   } catch {
+    // Endpoint telemetry must never change the application response.
     return;
-  }
-  if (!client) return;
-
-  client.record({
-    method: context.request.method,
-    route: context.routePattern,
-    status_code: status,
-    duration_ms: Math.max(0, Math.round(performance.now() - startedAt)),
-  });
-
-  const delivery = client.flush();
-  try {
-    context.locals.cfContext.waitUntil(delivery);
-  } catch {
-    void delivery.catch(() => {});
   }
 }
