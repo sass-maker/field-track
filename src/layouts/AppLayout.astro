@@ -123,30 +123,60 @@ const structuredData = {
       <p>After administrator enrollment, the employee app has no start, stop, pause, or unenroll control. Android keeps its location notification visible. The phone queues points through weak 4G; server policy decides which points count as on duty.</p>
     </aside>
     <main id="main-content"><slot /></main>
-    <footer class="site-footer">
-      <span>Field Track public demo</span>
-      <span>Synthetic data only · Economics and physical Android testing remain open</span>
-      <span>Analytics run only on the public demo routes. App Health measures visits, dashboard navigation, and CTA event names; it receives no employee records or location data.</span>
-      <a
-        class="site-footer-github"
-        href="https://github.com/sass-maker/field-track"
-        aria-label="GitHub repository"
-        title="GitHub repository"
-        target="_blank"
-        rel="noopener noreferrer"
-        ><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a
-      >
-    </footer>
+    <fleet-footer-extension
+      data-fleet-footer-project="field-track"
+      product-name="Field Track"
+      signature-name="Field Track"
+      signature-font="ui"
+      font-base="/fonts/fleet-footer-precise-v1/"
+      theme="light"
+      surface="web"
+      art-src="/footer-art/field-track.webp"
+      art-alt="A fictional map of imaginary terrain with looping colored routes, blank clipboards and pins; it shows no employee locations."
+      art-width="2172"
+      art-height="724"
+      art-position="50% 50%"
+      art-credit="Original illustration for Field Track"
+    >
+      <a slot="cta" data-fleet-footer-cta data-app-health-event="manager_dashboard_opened" href="/admin">
+        Open manager dashboard
+      </a>
+      <nav slot="navigation" data-fleet-footer-navigation aria-label="Field Track public demo information and links">
+        <p>Field Track public demo</p>
+        <p>Synthetic data only · Economics and physical Android testing remain open</p>
+        <p>
+          Analytics run only on the public demo routes. App Health measures visits, dashboard navigation, and CTA event names; it receives no employee records or location data.
+        </p>
+        <a
+          class="site-footer-github"
+          href="https://github.com/sass-maker/field-track"
+          aria-label="GitHub repository"
+          title="GitHub repository"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+          </svg>
+        </a>
+      </nav>
+    </fleet-footer-extension>
     <script
       is:inline
-      src="https://sassmaker.com/project-strip.js"
+      src="https://sassmaker.com/project-strip.js?v=precise-b0adaa67"
       data-project="field-track"
+      data-theme="light"
+      data-host-only="true"
       defer
     ></script>
     <script
       is:inline
-      src="https://sassmaker.com/ai-chat-footer.js"
+      src="https://sassmaker.com/ai-chat-footer.js?v=precise-b0adaa67"
+      data-project="field-track"
       data-name="Field Track"
+      data-theme="light"
+      data-surface="web"
+      data-host-only="true"
       data-feedback={isPublicDemoRoute ? undefined : 'false'}
       defer
     ></script>
