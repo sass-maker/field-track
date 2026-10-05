@@ -1,0 +1,19 @@
+{
+  "product": "Field Track",
+  "asset": "/footer-art/field-track.webp",
+  "credit": "Original illustration for Field Track",
+  "source": {
+    "kind": "original generated illustration",
+    "generator": "OpenAI image generation",
+    "sha256": "85b19418b10dcd09dc45e5f54700bc6729b8365c81da24418b805fcf60c1e1b2",
+    "dimensions": [2172, 724]
+  },
+  "derivative": {
+    "format": "WebP",
+    "sha256": "86fb27d49d8b870877d5aa33b75a5bd1406c9d77c86b5787e06796408df8bf8d",
+    "bytes": 313950,
+    "dimensions": [2172, 724],
+    "conversion": "Prepared original derivative; visual crop approval remains pending"
+  },
+  "description": "Fictional multi-biome terrain with looping colored routes, blank clipboards and pins. It contains no employee locations or real coordinates."
+}
